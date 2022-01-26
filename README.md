@@ -1,6 +1,4 @@
-## Đây là source code của ứng dụng TODO APP bằng React + Redux
-Video tutorial: https://youtu.be/g_K1w8e0lLo \
-Live Demo: https://focused-engelbart-3d0ac1.netlify.app/
+Cho phép undo va redu: cung 1 state và action sẽ luôn cho ra cùng 1 state
 
 # Getting Started with Create React App
 

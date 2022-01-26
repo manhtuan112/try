@@ -1,29 +1,66 @@
-import { Col, Row, Input, Button, Select, Tag } from 'antd';
-import Todo from '../Todo';
+import { Col, Row, Input, Button, Select, Tag } from "antd";
+import Todo from "../Todo";
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { actions } from "../../redux";
+import { v4 as uuidv4 } from "uuid";
+import { selector } from "../../redux";
 
 export default function TodoList() {
+  const [todoName, setTodoName] = useState();
+  const [priority, setPriority] = useState("Medium");
+
+  const dispatch = useDispatch();
+  const inputRef = useRef();
+  //Lay du lieu todo
+  // const todoList = useSelector(selector.todoListSelector);//theo selector bth
+  const todoList = useSelector(selector.todoUsingReselect)
+
+  
+
+  const handleAddBtnClick = () => {
+    dispatch(
+      actions.addTodo({
+        id: uuidv4(),
+        name: todoName,
+        priority: priority,
+        completed: false,
+      })
+    );
+
+    setTodoName("");
+    setPriority("Medium");
+    inputRef.current.focus();
+  };
+
   return (
-    <Row style={{ height: 'calc(100% - 40px)' }}>
-      <Col span={24} style={{ height: 'calc(100% - 40px)', overflowY: 'auto' }}>
-        <Todo name='Learn React' prioriry='High' />
-        <Todo name='Learn Redux' prioriry='Medium' />
-        <Todo name='Learn JavaScript' prioriry='Low' />
+    <Row style={{ height: "calc(100% - 40px)" }}>
+      <Col span={24} style={{ height: "calc(100% - 40px)", overflowY: "auto" }}>
+        {todoList.map((item) => (
+          <Todo key={item.id} id={item.id} name={item.name} prioriry={item.priority} completed={item.complete} />
+        ))}
       </Col>
+      {/* Nhap du lieu */}
       <Col span={24}>
-        <Input.Group style={{ display: 'flex' }} compact>
-          <Input />
-          <Select defaultValue="Medium">
-            <Select.Option value='High' label='High'>
-              <Tag color='red'>High</Tag>
+        <Input.Group style={{ display: "flex" }} compact>
+          <Input
+            value={todoName}
+            ref={inputRef}
+            onChange={(e) => setTodoName(e.target.value)}
+          />
+          {/* voi Select thi moi option co 1 value nen chi can truyen value khong can truyen e.target.value nhu input */}
+          <Select value={priority} onChange={(value) => setPriority(value)}>
+            <Select.Option value="High" label="High">
+              <Tag color="red">High</Tag>
             </Select.Option>
-            <Select.Option value='Medium' label='Medium'>
-              <Tag color='blue'>Medium</Tag>
+            <Select.Option value="Medium" label="Medium">
+              <Tag color="blue">Medium</Tag>
             </Select.Option>
-            <Select.Option value='Low' label='Low'>
-              <Tag color='gray'>Low</Tag>
+            <Select.Option value="Low" label="Low">
+              <Tag color="gray">Low</Tag>
             </Select.Option>
           </Select>
-          <Button type='primary'>
+          <Button onClick={handleAddBtnClick} type="primary">
             Add
           </Button>
         </Input.Group>
