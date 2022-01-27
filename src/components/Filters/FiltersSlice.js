@@ -48,5 +48,6 @@ const filtersSlice = createSlice({
   }
 })
 
+export const {searchFilterChange, statusFilterChange, priorityFilterChange} = filtersSlice.actions
 export default filtersSlice
 

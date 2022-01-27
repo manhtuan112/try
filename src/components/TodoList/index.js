@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import {todoUsingReselect} from "../../redux/selectors";
-import TodoSlice from "./todoSlice";
+import { addTodo } from "./todoSlice";
 
 export default function TodoList() {
   const [todoName, setTodoName] = useState();
@@ -15,13 +15,12 @@ export default function TodoList() {
   //Lay du lieu todo
   // const todoList = useSelector(selector.todoListSelector);//theo selector bth
   const todoList = useSelector(todoUsingReselect)
-  console.log(todoList)
 
   
 
   const handleAddBtnClick = () => {
     dispatch(
-      TodoSlice.actions.addTodo({
+      addTodo({
         id: uuidv4(),
         name: todoName,
         priority: priority,
