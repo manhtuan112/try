@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import {todoUsingReselect} from "../../redux/selectors";
-import { addTodo } from "./todoSlice";
+import TodoSlice, { addTodo } from "./todoSlice";
 
 export default function TodoList() {
   const [todoName, setTodoName] = useState();
@@ -27,6 +27,7 @@ export default function TodoList() {
         completed: false,
       })
     );
+
 
     setTodoName("");
     setPriority("Medium");
