@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { actions } from '../../redux';
 import { useSelector } from 'react-redux';
+import { filterPrioritySelector, filterStatusSelector, searchTextSelector } from '../../redux/selectors';
 
 const { Search } = Input;
 
@@ -11,24 +12,22 @@ const { Search } = Input;
 export default function Filters() {
 
   const dispatch = useDispatch()
-  const [searchText, setSearchText] = useState('')
-  const [filterStatus, setFilterStatus] = useState('All')
-  const [filterPriority, setFilterPriority] = useState([])
+  
+  const searchText = useSelector(searchTextSelector)
+  const filterStatus = useSelector(filterStatusSelector)
+  const filterPriority = useSelector(filterPrioritySelector)
 
 
   const handleChangeSearch = (e) =>{
-    setSearchText(e.target.value)
     dispatch(actions.searchTodo(e.target.value))
   }
 
   
   const handleStatusChange = (e) =>{
-    setFilterStatus(e.target.value)
     dispatch(actions.statusFilterChange(e.target.value))
   } 
 
   const handlePriorityChange = (e) => {
-    setFilterPriority(e)
     dispatch(actions.priorityFilterChange(e))
   }
   

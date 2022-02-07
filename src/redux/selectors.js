@@ -47,7 +47,6 @@ export const todoUsingReselect = createSelector(
     if (status === "All") // Nếu status == 'All' thì nếu priority là mảng rỗng thì lọc tên chứa kí tự search còn ko là mảng rỗng thì kiểm tra thêm là priority của todo đó có trong list priority ko
       return priority.length ? todoList.filter((todo) => todo.name.includes(searchText) && priority.includes(todo.priority)) : todoList.filter((todo) => todo.name.includes(searchText));
     else
-    
       return status === "Completed" //return dung đằng trc toán tử 3 ngôi
         // Thêm điều kiện lọc cho priority
         ? todoList.filter((todo) => todo.name.includes(searchText) && todo.complete && (priority.length ? priority.includes(todo.priority) : true))
