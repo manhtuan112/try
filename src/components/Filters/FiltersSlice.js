@@ -49,5 +49,5 @@ const filtersSlice = createSlice({
 })
 
 export const {searchFilterChange, statusFilterChange, priorityFilterChange} = filtersSlice.actions
-export default filtersSlice
+export default filtersSlice.reducer
 

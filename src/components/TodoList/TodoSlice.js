@@ -69,4 +69,4 @@ const TodoSlice = createSlice({
 })
 
 export const {addTodo, changeStatus} = TodoSlice.actions
-export default TodoSlice
+export default TodoSlice.reducer

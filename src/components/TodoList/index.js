@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import {todoUsingReselect} from "../../redux/selectors";
-import TodoSlice, { addTodo } from "./todoSlice";
+import { addTodo } from "./TodoSlice";
 
 export default function TodoList() {
   const [todoName, setTodoName] = useState();
